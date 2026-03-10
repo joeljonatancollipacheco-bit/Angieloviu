@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Para ti, mi amor 🌹</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rose:#c0414b; --rose-light:#e8a0a6; --rose-pale:#f9e8ea;
+  --gold:#c9a96e; --gold-light:#e8d5b0;
+  --cream:#fdf6f0; --dark:#1a0a0c; --text:#3d1a20;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;}
+
+@media(hover:hover) and (pointer:fine){
+  body{cursor:none;}
+  #cursor{width:11px;height:11px;background:var(--rose);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+  #cursorTrail{width:28px;height:28px;border:1px solid var(--rose-light);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:all .12s ease;transform:translate(-50%,-50%);}
+}
+
+.petals-container{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.petal{position:absolute;top:-40px;animation:fall linear infinite;opacity:.55;}
+@keyframes fall{
+  0%{transform:translateY(-40px) rotate(0deg);opacity:.7;}
+  50%{transform:translateY(50vh) rotate(180deg) translateX(25px);}
+  100%{transform:translateY(110vh) rotate(360deg) translateX(-15px);opacity:0;}
+}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .85s ease,transform .85s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+
+.divisor{display:flex;align-items:center;justify-content:center;gap:16px;padding:0 24px;margin:0 auto;max-width:500px;}
+.divisor-linea{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold-light));}
+.divisor-linea.der{background:linear-gradient(to left,transparent,var(--gold-light));}
+.divisor-icon{color:var(--rose);font-size:1rem;}
+
+/* HERO */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+  padding:clamp(70px,12vw,110px) 20px clamp(50px,8vw,80px);
+  background:radial-gradient(ellipse at 50% 0%,#f5d5d8 0%,var(--cream) 70%);
+  text-align:center;
+}
+.hero::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c0414b' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");}
+.foto-marco{position:relative;margin-bottom:clamp(24px,5vw,40px);animation:flotar 4s ease-in-out infinite;}
+@keyframes flotar{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.foto-principal{
+  width:clamp(150px,40vw,210px);height:clamp(150px,40vw,210px);
+  border-radius:50%;object-fit:cover;border:3px solid var(--gold);
+  box-shadow:0 0 0 8px rgba(192,65,75,.08),0 20px 50px rgba(192,65,75,.2);
+  display:block;background:linear-gradient(135deg,#f5d5d8,#c0414b);
+}
+.foto-marco::before,.foto-marco::after{content:'✦';position:absolute;color:var(--gold);font-size:.9rem;animation:rotar 6s linear infinite;}
+.foto-marco::before{top:4px;left:-8px;}
+.foto-marco::after{bottom:4px;right:-8px;animation-direction:reverse;}
+@keyframes rotar{from{transform:rotate(0);}to{transform:rotate(360deg);}}
+.hero-etiqueta{font-size:clamp(.55rem,1.8vw,.65rem);letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;animation:fadeUp 1s ease .3s both;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,9vw,5.5rem);font-weight:300;font-style:italic;line-height:1.1;color:var(--dark);margin-bottom:20px;animation:fadeUp 1s ease .5s both;}
+.hero h1 span{color:var(--rose);font-weight:400;}
+.hero-parrafo{max-width:420px;line-height:1.9;font-size:clamp(.82rem,2.5vw,.9rem);color:#7a4a50;animation:fadeUp 1s ease .7s both;}
+.scroll-hint{margin-top:clamp(28px,6vw,48px);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp 1s ease 1s both;}
+.scroll-hint span{font-size:.6rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:crecer 2s ease-in-out infinite;}
+@keyframes crecer{0%,100%{height:26px;}50%{height:46px;}}
+
+/* MENSAJE + FOTO 2 */
+.mensaje{padding:clamp(60px,10vw,100px) clamp(16px,5vw,50px);position:relative;z-index:1;background:white;}
+.mensaje-inner{max-width:840px;margin:auto;text-align:center;}
+.mensaje h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,6vw,3.5rem);font-weight:300;font-style:italic;color:var(--dark);margin:24px 0 36px;}
+.mensaje-body{display:grid;grid-template-columns:1fr;gap:30px;align-items:center;}
+@media(min-width:640px){.mensaje-body{grid-template-columns:1fr 1fr;text-align:left;}}
+.mensaje-img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:8px;box-shadow:8px 8px 0 var(--rose-pale);background:linear-gradient(135deg,#e8d5b0,#c9a96e);}
+.mensaje-texto{font-size:clamp(.86rem,2.2vw,.98rem);line-height:2.1;color:#5a3035;position:relative;padding:20px 10px 20px 24px;}
+.mensaje-texto::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:6rem;color:var(--rose-pale);position:absolute;top:-8px;left:-6px;line-height:1;z-index:0;}
+.mensaje-texto p{position:relative;z-index:1;}
+
+/* TIRA 3 FOTOS */
+.tira-fotos{padding:clamp(30px,5vw,60px) clamp(16px,4vw,40px);background:var(--cream);position:relative;z-index:1;}
+.tira-inner{max-width:960px;margin:auto;display:grid;gap:12px;grid-template-columns:1fr 1fr;}
+@media(min-width:560px){.tira-inner{grid-template-columns:1.5fr 1fr 1fr;}}
+.tira-img{width:100%;object-fit:cover;border-radius:8px;box-shadow:0 6px 24px rgba(192,65,75,.1);transition:transform .5s ease;display:block;}
+.tira-img:nth-child(1){aspect-ratio:2/3;grid-row:span 2;background:linear-gradient(135deg,#d5e8f0,#5a8eae);}
+.tira-img:nth-child(2){aspect-ratio:1;background:linear-gradient(135deg,#f0d5e8,#ae5a8e);}
+.tira-img:nth-child(3){aspect-ratio:1;background:linear-gradient(135deg,#e8f0d5,#8eae5a);}
+@media(max-width:559px){.tira-img:nth-child(1){grid-row:span 1;aspect-ratio:1;}}
+.tira-img:hover{transform:scale(1.03) rotate(-.8deg);}
+
+/* GALERÍA */
+.galeria{padding:clamp(60px,10vw,100px) clamp(16px,4vw,40px);background:linear-gradient(180deg,#fceef0,white);position:relative;z-index:1;}
+.galeria h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,6vw,3.5rem);font-weight:300;font-style:italic;color:var(--dark);text-align:center;margin:24px 0 clamp(28px,6vw,54px);}
+.grid{display:grid;gap:10px;max-width:960px;margin:auto;grid-template-columns:1fr 1fr;}
+@media(min-width:500px){
+  .grid{grid-template-columns:repeat(3,1fr);}
+  .grid-item:nth-child(1){grid-column:span 2;}
+}
+@media(min-width:768px){
+  .grid{grid-template-columns:repeat(4,1fr);gap:12px;}
+  .grid-item:nth-child(1){grid-column:span 2;grid-row:span 2;}
+  .grid-item:nth-child(4){grid-column:span 2;}
+}
+.grid-item{overflow:hidden;border-radius:6px;aspect-ratio:1;position:relative;}
+.grid-item:nth-child(1){aspect-ratio:unset;}
+.grid-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.25,.46,.45,.94);}
+.grid-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(192,65,75,.28),transparent 55%);opacity:0;transition:opacity .4s;}
+.grid-item:hover img{transform:scale(1.07);}
+.grid-item:hover::after{opacity:1;}
+
+/* FRASES CARRUSEL */
+.frases{padding:clamp(60px,10vw,100px) 0;background:var(--cream);position:relative;z-index:1;overflow:hidden;}
+.frases h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,6vw,3.5rem);font-weight:300;font-style:italic;color:var(--dark);text-align:center;margin:24px 0 clamp(28px,5vw,50px);padding:0 20px;}
+.track-wrap{overflow:hidden;position:relative;}
+.track-wrap::before,.track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:50px;z-index:2;}
+.track-wrap::before{left:0;background:linear-gradient(to right,var(--cream),transparent);}
+.track-wrap::after{right:0;background:linear-gradient(to left,var(--cream),transparent);}
+.frases-track{display:flex;gap:14px;width:max-content;animation:deslizar 32s linear infinite;padding:8px 0;}
+.frases-track.reverse{animation-direction:reverse;animation-duration:28s;}
+.frases-track:hover{animation-play-state:paused;}
+@keyframes deslizar{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.frase-card{background:white;border:1px solid var(--gold-light);border-radius:6px;padding:24px 26px;width:260px;flex-shrink:0;text-align:center;transition:box-shadow .3s,transform .3s;}
+.frase-card:hover{box-shadow:0 10px 36px rgba(192,65,75,.1);transform:translateY(-3px);}
+.frase-icon{font-size:1.6rem;margin-bottom:12px;display:block;}
+.frase-texto{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.55;}
+.frase-sub{margin-top:10px;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);}
+
+/* FOTO LATERAL */
+.foto-lateral{padding:clamp(50px,8vw,90px) clamp(16px,5vw,50px);background:white;position:relative;z-index:1;}
+.foto-lateral-inner{max-width:900px;margin:auto;display:grid;grid-template-columns:1fr;gap:36px;align-items:center;}
+@media(min-width:640px){.foto-lateral-inner{grid-template-columns:1fr 1fr;}}
+.foto-lateral-img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:8px;box-shadow:-8px 8px 0 var(--gold-light);background:linear-gradient(135deg,#d5e8e0,#5a9e80);}
+@media(min-width:640px){.foto-lateral-inner .foto-lateral-img{box-shadow:8px 8px 0 var(--gold-light);}}
+.foto-lateral-texto{text-align:center;}
+@media(min-width:640px){.foto-lateral-texto{text-align:left;}}
+.foto-lateral-etiqueta{font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block;}
+.foto-lateral-texto h3{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,5vw,2.8rem);font-weight:300;font-style:italic;color:var(--dark);margin-bottom:20px;}
+.foto-lateral-texto h3 span{color:var(--rose);}
+.foto-lateral-texto p{font-size:clamp(.84rem,2vw,.95rem);line-height:2;color:#5a3035;}
+
+/* CONTADOR */
+.contador{padding:clamp(60px,10vw,90px) 20px;background:var(--dark);text-align:center;position:relative;z-index:1;overflow:hidden;}
+.contador::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,#3d1a20,var(--dark) 70%);}
+.contador-inner{position:relative;z-index:1;}
+.contador-etiqueta{font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:block;}
+.contador h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,5vw,3rem);font-style:italic;font-weight:300;color:white;margin-bottom:clamp(30px,6vw,50px);}
+.tiempo-grid{display:flex;justify-content:center;gap:clamp(14px,4vw,40px);flex-wrap:wrap;}
+.tiempo-item{text-align:center;}
+.tiempo-num{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,8vw,5rem);font-weight:300;color:var(--rose-light);line-height:1;display:block;}
+.tiempo-label{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:6px;}
+.tiempo-sep{font-family:'Cormorant Garamond',serif;font-size:3.5rem;color:var(--gold);opacity:.25;align-self:center;margin-top:-16px;}
+@media(max-width:400px){.tiempo-sep{display:none;}}
+
+/* SORPRESA */
+.sorpresa{padding:clamp(60px,10vw,100px) clamp(16px,5vw,40px);text-align:center;position:relative;z-index:1;background:white;}
+.sorpresa h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,6vw,3.5rem);font-weight:300;font-style:italic;color:var(--dark);margin:24px 0 44px;}
+.btn-sorpresa{
+  display:inline-block;padding:15px 46px;border:1px solid var(--rose);background:transparent;
+  color:var(--rose);font-family:'Montserrat',sans-serif;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
+  cursor:pointer;position:relative;transition:color .4s;overflow:hidden;-webkit-tap-highlight-color:transparent;
+}
+.btn-sorpresa::before{content:'';position:absolute;inset:0;background:var(--rose);transform:translateX(-100%);transition:transform .4s cubic-bezier(.25,.46,.45,.94);z-index:-1;}
+.btn-sorpresa:hover,.btn-sorpresa:active{color:white;}
+.btn-sorpresa:hover::before,.btn-sorpresa:active::before{transform:translateX(0);}
+.carta-amor{display:none;max-width:580px;margin:54px auto 0;padding:clamp(30px,6vw,60px) clamp(20px,5vw,50px);background:var(--cream);border:1px solid var(--gold-light);position:relative;}
+@keyframes aparecer{from{opacity:0;transform:scale(.85) translateY(18px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.carta-amor::before{content:'✦';position:absolute;top:16px;left:16px;color:var(--gold);font-size:.85rem;}
+.carta-amor::after{content:'✦';position:absolute;bottom:16px;right:16px;color:var(--gold);font-size:.85rem;}
+.carta-texto{font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,3.5vw,1.7rem);font-style:italic;line-height:1.85;color:var(--text);}
+.carta-firma{margin-top:28px;font-size:.72rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;}
+
+/* CORAZONES */
+.heart-burst{position:fixed;pointer-events:none;z-index:9997;font-size:1.2rem;animation:burst 1.1s ease-out forwards;}
+@keyframes burst{0%{opacity:1;transform:translate(0,0) scale(.5);}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.2);}}
+
+footer{background:var(--dark);color:rgba(255,255,255,.45);text-align:center;padding:36px 20px;font-size:.72rem;letter-spacing:.2em;position:relative;z-index:1;}
+footer span{color:var(--rose-light);}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursorTrail"></div>
+<div class="petals-container" id="petals"></div>
+
+<!-- HERO — foto 1 -->
+<section class="hero">
+  <p class="hero-etiqueta">Una carta de amor digital</p>
+  <div class="foto-marco">
+    <img src="img/ella1.jpg" class="foto-principal" alt="Mi amor"
+         onerror="this.style.background='linear-gradient(135deg,#f5d5d8,#c0414b)';this.removeAttribute('src')">
+  </div>
+  <h1>Para la chica<br>más <span>hermosa</span></h1>
+  <p class="hero-parrafo">
+    Desde el primer momento supe que eras especial.<br>
+    Esta página es solo un reflejo pequeño de todo lo que siento.
+  </p>
+  <div class="scroll-hint">
+    <span>Sigue leyendo</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MENSAJE — foto 2 -->
+<section class="mensaje reveal">
+  <div class="mensaje-inner">
+    <div class="divisor"><div class="divisor-linea"></div><span class="divisor-icon">♡</span><div class="divisor-linea der"></div></div>
+    <h2>Un mensaje para ti</h2>
+    <div class="mensaje-body">
+      <img src="a1.jpeg" class="mensaje-img" alt=""
+           onerror="this.style.background='linear-gradient(135deg,#e8d5b0,#c9a96e)';this.removeAttribute('src')">
+      <div class="mensaje-texto">
+        <p>
+          Cada sonrisa tuya ilumina mi día de maneras que no sé describir
+          con palabras ordinarias.
+          Y aunque esto no es más que una página en la vastedad de internet,
+          lo que siento por ti llena cada rincón de mi existencia.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIRA — fotos 3, 4, 5 -->
+<div class="tira-fotos reveal">
+  <div class="tira-inner">
+    <img src="a2.jpeg" class="tira-img" alt=""
+         onerror="this.style.background='linear-gradient(135deg,#d5e8f0,#5a8eae)';this.removeAttribute('src')">
+    <img src="a3.jpeg" class="tira-img" alt=""
+         onerror="this.style.background='linear-gradient(135deg,#f0d5e8,#ae5a8e)';this.removeAttribute('src')">
+    <img src="a4.jpeg" class="tira-img" alt=""
+         onerror="this.style.background='linear-gradient(135deg,#e8f0d5,#8eae5a)';this.removeAttribute('src')">
+  </div>
+</div>
+
+<!-- GALERÍA — fotos 6, 7, 8, 9, 10 -->
+<section class="galeria reveal">
+  <div class="divisor"><div class="divisor-linea"></div><span class="divisor-icon">✦</span><div class="divisor-linea der"></div></div>
+  <h2>tu siendo tu <3</h2>
+  <div class="grid">
+    <div class="grid-item">
+      <img src="a5.jpeg" alt=""
+           onerror="this.style.background='linear-gradient(135deg,#f5d5d8,#c0414b)';this.removeAttribute('src')">
+    </div>
+    <div class="grid-item">
+      <img src="a6.jpeg" alt=""
+           onerror="this.style.background='linear-gradient(135deg,#e8d5b0,#c9a96e)';this.removeAttribute('src')">
+    </div>
+    <div class="grid-item">
+      <img src="a7.jpeg" alt=""
+           onerror="this.style.background='linear-gradient(135deg,#d5e8e0,#5a9e80)';this.removeAttribute('src')">
+    </div>
+    <div class="grid-item">
+      <img src="a8.jpeg" alt=""
+           onerror="this.style.background='linear-gradient(135deg,#d5d8f0,#5a6eae)';this.removeAttribute('src')">
+    </div>
+    <div class="grid-item">
+      <img src="a9.jpeg" alt=""
+           onerror="this.style.background='linear-gradient(135deg,#f0e8d5,#c9906e)';this.removeAttribute('src')">
+    </div>
+  </div>
+</section>
+
+<!-- FRASES — dos filas de carrusel -->
+<section class="frases reveal">
+  <div class="divisor"><div class="divisor-linea"></div><span class="divisor-icon">✦</span><div class="divisor-linea der"></div></div>
+  <h2>Todo lo que eres ✨</h2>
+
+  <!-- Fila 1: Scout & Maestra →  -->
+  <div class="track-wrap">
+    <div class="frases-track">
+      <div class="frase-card"><span class="frase-icon">⚜️</span><p class="frase-texto">La mejor Scout que jamás ha existido</p><p class="frase-sub">Líder nata</p></div>
+      <div class="frase-card"><span class="frase-icon">🌟</span><p class="frase-texto">La maestra más brillante y dedicada del mundo</p><p class="frase-sub">Educadora de corazón</p></div>
+      <div class="frase-card"><span class="frase-icon">🧭</span><p class="frase-texto">Guías con el alma, no solo con palabras</p><p class="frase-sub">Scout de vocación</p></div>
+      <div class="frase-card"><span class="frase-icon">💡</span><p class="frase-texto">Tu inteligencia ilumina cada salón que pisas</p><p class="frase-sub">Mente brillante</p></div>
+      <div class="frase-card"><span class="frase-icon">🏕️</span><p class="frase-texto">Donde hay aventura, ahí estás tú liderando</p><p class="frase-sub">Espíritu scout</p></div>
+      <div class="frase-card"><span class="frase-icon">📚</span><p class="frase-texto">Haces que aprender sea la experiencia más bonita</p><p class="frase-sub">Maestra inspiradora</p></div>
+      <div class="frase-card"><span class="frase-icon">🌿</span><p class="frase-texto">Tienes la fuerza de la naturaleza y la dulzura del viento</p><p class="frase-sub">Scout en esencia</p></div>
+      <div class="frase-card"><span class="frase-icon">✨</span><p class="frase-texto">Cada alumno que te conoce se lleva un pedacito de tu magia</p><p class="frase-sub">Maestra única</p></div>
+      <!-- duplicado loop -->
+      <div class="frase-card"><span class="frase-icon">⚜️</span><p class="frase-texto">La mejor Scout que jamás ha existido</p><p class="frase-sub">Líder nata</p></div>
+      <div class="frase-card"><span class="frase-icon">🌟</span><p class="frase-texto">La maestra más brillante y dedicada del mundo</p><p class="frase-sub">Educadora de corazón</p></div>
+      <div class="frase-card"><span class="frase-icon">🧭</span><p class="frase-texto">Guías con el alma, no solo con palabras</p><p class="frase-sub">Scout de vocación</p></div>
+      <div class="frase-card"><span class="frase-icon">💡</span><p class="frase-texto">Tu inteligencia ilumina cada salón que pisas</p><p class="frase-sub">Mente brillante</p></div>
+      <div class="frase-card"><span class="frase-icon">🏕️</span><p class="frase-texto">Donde hay aventura, ahí estás tú liderando</p><p class="frase-sub">Espíritu scout</p></div>
+      <div class="frase-card"><span class="frase-icon">📚</span><p class="frase-texto">Haces que aprender sea la experiencia más bonita</p><p class="frase-sub">Maestra inspiradora</p></div>
+      <div class="frase-card"><span class="frase-icon">🌿</span><p class="frase-texto">Tienes la fuerza de la naturaleza y la dulzura del viento</p><p class="frase-sub">Scout en esencia</p></div>
+      <div class="frase-card"><span class="frase-icon">✨</span><p class="frase-texto">Cada alumno que te conoce se lleva un pedacito de tu magia</p><p class="frase-sub">Maestra única</p></div>
+    </div>
+  </div>
+
+  <!-- Fila 2: Basquetbol ← (reversa) -->
+  <div class="track-wrap" style="margin-top:14px;">
+    <div class="frases-track reverse">
+      <div class="frase-card"><span class="frase-icon">🏀</span><p class="frase-texto">La mejor jugadora de basquetbol que he visto en mi vida</p><p class="frase-sub">Cancha y corazón</p></div>
+      <div class="frase-card"><span class="frase-icon">🥇</span><p class="frase-texto">Nadie domina la cancha como tú lo haces</p><p class="frase-sub">MVP siempre</p></div>
+      <div class="frase-card"><span class="frase-icon">⛹️</span><p class="frase-texto">Tu salto es tan alto como mi admiración por ti</p><p class="frase-sub">Jugadora élite</p></div>
+      <div class="frase-card"><span class="frase-icon">💪</span><p class="frase-texto">Fuerte en la cancha, más fuerte aún en la vida</p><p class="frase-sub">Guerrera</p></div>
+      <div class="frase-card"><span class="frase-icon">🎯</span><p class="frase-texto">Cada tiro tuyo es pura precisión y elegancia</p><p class="frase-sub">Puntería perfecta</p></div>
+      <div class="frase-card"><span class="frase-icon">🌊</span><p class="frase-texto">Te mueves por la cancha como si volaras</p><p class="frase-sub">Gracia y potencia</p></div>
+      <div class="frase-card"><span class="frase-icon">🏆</span><p class="frase-texto">Donde juegas tú, siempre gana el equipo</p><p class="frase-sub">Campeona nata</p></div>
+      <div class="frase-card"><span class="frase-icon">🔥</span><p class="frase-texto">Tu pasión por el basquet es igual de grande que mi amor por ti</p><p class="frase-sub">Pasión infinita</p></div>
+      <!-- duplicado loop -->
+      <div class="frase-card"><span class="frase-icon">🏀</span><p class="frase-texto">La mejor jugadora de basquetbol que he visto en mi vida</p><p class="frase-sub">Cancha y corazón</p></div>
+      <div class="frase-card"><span class="frase-icon">🥇</span><p class="frase-texto">Nadie domina la cancha como tú lo haces</p><p class="frase-sub">MVP siempre</p></div>
+      <div class="frase-card"><span class="frase-icon">⛹️</span><p class="frase-texto">Tu salto es tan alto como mi admiración por ti</p><p class="frase-sub">Jugadora élite</p></div>
+      <div class="frase-card"><span class="frase-icon">💪</span><p class="frase-texto">Fuerte en la cancha, más fuerte aún en la vida</p><p class="frase-sub">Guerrera</p></div>
+      <div class="frase-card"><span class="frase-icon">🎯</span><p class="frase-texto">Cada tiro tuyo es pura precisión y elegancia</p><p class="frase-sub">Puntería perfecta</p></div>
+      <div class="frase-card"><span class="frase-icon">🌊</span><p class="frase-texto">Te mueves por la cancha como si volaras</p><p class="frase-sub">Gracia y potencia</p></div>
+      <div class="frase-card"><span class="frase-icon">🏆</span><p class="frase-texto">Donde juegas tú, siempre gana el equipo</p><p class="frase-sub">Campeona nata</p></div>
+      <div class="frase-card"><span class="frase-icon">🔥</span><p class="frase-texto">Tu pasión por el basquet es igual de grande que mi amor por ti</p><p class="frase-sub">Pasión infinita</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOTO LATERAL — basquetbol -->
+<section class="foto-lateral reveal">
+  <div class="foto-lateral-inner">
+    <img src="a10.jpeg" class="foto-lateral-img" alt=""
+         onerror="this.style.background='linear-gradient(135deg,#d5e8f0,#5a8eae)';this.removeAttribute('src')">
+    <div class="foto-lateral-texto">
+      <span class="foto-lateral-etiqueta">🏀 En la cancha</span>
+      <h3>La reina de<br>la <span>cancha</span></h3>
+      <p>
+        En la cancha eres imparable — igual que en mi corazón.
+        Eres mi jugadora favorita, hoy y siempre.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTADOR -->
+<section class="contador reveal">
+  <div class="contador-inner">
+    <span class="contador-etiqueta">Llevamos juntos</span>
+    <h2>Cada segundo contigo es un regalo</h2>
+    <div class="tiempo-grid">
+      <div class="tiempo-item">
+        <span class="tiempo-num" id="dias">000</span>
+        <div class="tiempo-label">Días</div>
+      </div>
+      <div class="tiempo-sep">·</div>
+      <div class="tiempo-item">
+        <span class="tiempo-num" id="horas">00</span>
+        <div class="tiempo-label">Horas</div>
+      </div>
+      <div class="tiempo-sep">·</div>
+      <div class="tiempo-item">
+        <span class="tiempo-num" id="minutos">00</span>
+        <div class="tiempo-label">Minutos</div>
+      </div>
+      <div class="tiempo-sep">·</div>
+      <div class="tiempo-item">
+        <span class="tiempo-num" id="segundos">00</span>
+        <div class="tiempo-label">Segundos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SORPRESA -->
+<section class="sorpresa reveal">
+  <div class="divisor"><div class="divisor-linea"></div><span class="divisor-icon">♡</span><div class="divisor-linea der"></div></div>
+  <h2>Un secreto para ti 💌</h2>
+  <button class="btn-sorpresa" onclick="mostrarCarta()">Abrir mi carta</button>
+  <div class="carta-amor" id="carta">
+    <p class="carta-texto">
+      "Eres la persona más especial que ha cruzado mi vida.<br><br>
+      Scout, maestra, campeona de basquetbol…<br>
+      pero sobre todo, la dueña de mi corazón.<br><br>
+      Te quiero hoy, mañana, y en todos los momentos
+      que aún no hemos vivido."
+    </p>
+    <p class="carta-firma">— Con todo mi amor ❤️</p>
+  </div>
+</section>
+
+<footer>
+  Hecho con <span>♡</span> solo para ti &nbsp;·&nbsp; Con amor, siempre
+</footer>
+
+<script>
+/* CURSOR */
+const cursor=document.getElementById('cursor'),trail=document.getElementById('cursorTrail');
+if(cursor&&trail){
+  let mx=0,my=0,tx=0,ty=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+  (function loop(){tx+=(mx-tx)*.15;ty+=(my-ty)*.15;trail.style.left=tx+'px';trail.style.top=ty+'px';requestAnimationFrame(loop);})();
+}
+
+/* PÉTALOS */
+const pc=document.getElementById('petals'),sym=['🌸','🌹','✿','❀','🌺','♡'];
+for(let i=0;i<16;i++){
+  const p=document.createElement('span');
+  p.className='petal';p.textContent=sym[Math.floor(Math.random()*sym.length)];
+  p.style.left=Math.random()*100+'%';p.style.fontSize=(.75+Math.random()*.7)+'rem';
+  p.style.animationDuration=(9+Math.random()*11)+'s';p.style.animationDelay=(-Math.random()*14)+'s';
+  pc.appendChild(p);
+}
+
+/* CORAZONES */
+function spawnHearts(x,y){
+  const emojis=['❤️','💕','💖','💗','🏀','⚜️'];
+  for(let i=0;i<7;i++){
+    const h=document.createElement('div');h.className='heart-burst';
+    h.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    h.style.left=x+'px';h.style.top=y+'px';
+    const a=Math.random()*Math.PI*2,d=55+Math.random()*75;
+    h.style.setProperty('--dx',Math.cos(a)*d+'px');h.style.setProperty('--dy',Math.sin(a)*d+'px');
+    document.body.appendChild(h);setTimeout(()=>h.remove(),1200);
+  }
+}
+document.addEventListener('click',e=>spawnHearts(e.clientX,e.clientY));
+document.addEventListener('touchstart',e=>{const t=e.touches[0];spawnHearts(t.clientX,t.clientY);},{passive:true});
+
+/* SCROLL REVEAL */
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+/* CARTA */
+function mostrarCarta(){
+  const c=document.getElementById('carta');
+  c.style.display='block';c.style.animation='none';c.offsetHeight;
+  c.style.animation='aparecer .8s cubic-bezier(.34,1.56,.64,1) forwards';
+  setTimeout(()=>c.scrollIntoView({behavior:'smooth',block:'center'}),100);
+}
+
+/* CONTADOR — cambia la fecha aquí ↓ */
+const INICIO=new Date('2024-01-01T00:00:00');
+function tick(){
+  const d=new Date()-INICIO;
+  document.getElementById('dias').textContent=String(Math.floor(d/86400000)).padStart(3,'0');
+  document.getElementById('horas').textContent=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('minutos').textContent=String(Math.floor((d%3600000)/60000)).padStart(2,'0');
+  document.getElementById('segundos').textContent=String(Math.floor((d%60000)/1000)).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
